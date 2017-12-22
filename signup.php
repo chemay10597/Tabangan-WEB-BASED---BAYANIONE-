@@ -13,10 +13,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Sign-up</title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
-    <link rel="stylesheet" type="text/css" href="Fonts/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="CSS/style.css">
-    <script type="text/javascript" src="Library/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../fonts/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script type="text/javascript" src="../jquery/jquery.min.js"></script>
     <!-- script to choose account type -->
     <script type="text/javascript">
       //code to display textboxes based on the account_type
@@ -46,7 +46,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class = "navbar-brand" href="index.php"><span><image src = "../images/logo.png" height= "30px" width="30px"></span><span>BayaniOne</span></a>
+            <a class = "navbar-brand" href="index.php"><span><image src = "../images/logo.png" height= "50px" width="50px"></span><span><image src = "../images/logotext.png" height= "50px" width="200px"></span></a>
           <!-- <a class="navbar-brand" href="index.html">BayaniOne<span>.</span></a> -->
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
@@ -57,7 +57,7 @@
                     <li><input class="form-control" style="border: 1px solid green;border-radius: 4px;" placeholder="username" type="text" name="username"></li>
                     <li>&nbsp;</li>
                     <li><input class="form-control" style="border: 1px solid green;border-radius: 4px;" placeholder="password" type="password" name="password"></li>
-                    <li><input id="btnlogin" type="submit" value="Login" name="submit" /></li>
+                    <li><input class="btnlogin" type="submit" value="Login" name="submit" /></li>
                   </ul>
                 </form>
                 <?php
@@ -108,7 +108,7 @@
 
 
   <body>
-  <section id="work-shop" class="section-padding">
+  <section id="goodwork" class="section-padding">
     <div class="main">
       <div class="header" >
         <h1>Register Now</h1>
@@ -236,8 +236,8 @@
         </form>
       </div>
      </section>
-     <script src="Library/jquery.min.js"></script>
-     <script src="Library/bootstrap.min.js"></script>
+     <script src="../jquery/jquery.min.js"></script>
+     <script src="../jquery/bootstrap.min.js"></script>
         <footer id="myFooter">
           <div class="container">
             <div class="row">

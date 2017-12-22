@@ -9,12 +9,16 @@
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head runat="server">
+  <head >
       <title>BayaniOne</title>
       <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
       <link rel="stylesheet" type="text/css" href="../fonts/font-awesome.min.css">
       <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="../css/style.css">
+      <link rel="stylesheet" type="text/css" href="../css/button.css">
+      <link rel="stylesheet" type="text/css" href="../css/nav.css">
+      <link rel="stylesheet" type="text/css" href="../css/sb-admin.css">
+
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -25,17 +29,18 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-  		      <a class = "navbar-brand" href="index.php"><span><image src = "Images/logo.png" height= "30px" width="30px"></span><span>BayaniOne</span></a>
-  		    </div>
+            <a class = "navbar-brand" href="index.php"><span><image src = "../images/logo.png" height= "50px" width="50px"></span><span><image src = "../images/logotext.png" id="logotext" height= "50px" width="200px"></span></a>
+          <!-- <a class="navbar-brand" href="index.html">BayaniOne<span>.</span></a> -->
+          </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
               <li>
                 <form action="" method="POST">
                   <ul class="nav navbar-nav navbar-right">
-                    <li><input class="form-control" style="border: 1px solid green;border-radius: 4px;" placeholder="username" type="text" name="username"></li>
+                    <li><input class="form-control" style="border: 1px solid #000000;border-radius: 4px;" placeholder="username" type="text" name="username"></li>
                     <li>&nbsp;</li>
-                    <li><input class="form-control" style="border: 1px solid green;border-radius: 4px;" placeholder="password" type="password" name="password"></li>
-                    <li><input id="btnlogin" type="submit" value="Login" name="submit" /></li>
+                    <li><input class="form-control" style="border: 1px solid #000000;border-radius: 4px;" placeholder="password" type="password" name="password"></li>
+                    <li><input class="btnlogin" type="submit" value="Login" name="submit" /></li>
                   </ul>
                 </form>
                 <?php
@@ -210,7 +215,7 @@
           <div class="pm-staff-profile-container" >
             <div class="pm-staff-profile-image-wrapper text-center">
               <div class="pm-staff-profile-image">
-                  <img src="../images/tes.jpg" alt="" class="img-thumbnail img-circle" />
+                  <img src="/images/tes.jpg" alt="" class="img-thumbnail img-circle" />
               </div>
             </div>
             <div class="pm-staff-profile-details text-center">
@@ -225,7 +230,7 @@
           <div class="pm-staff-profile-container" >
             <div class="pm-staff-profile-image-wrapper text-center">
               <div class="pm-staff-profile-image">
-                  <img src="../images/mentor.jpg" alt="" class="img-thumbnail img-circle" />
+                  <img src="/images/mentor.jpg" alt="" class="img-thumbnail img-circle" />
               </div>
             </div>
             <div class="pm-staff-profile-details text-center">
@@ -240,7 +245,7 @@
             <div class="pm-staff-profile-container" >
               <div class="pm-staff-profile-image-wrapper text-center">
                 <div class="pm-staff-profile-image">
-                    <img src="../images/mentor.jpg" alt="" class="img-thumbnail img-circle" />
+                    <img src="/images/mentor.jpg" alt="" class="img-thumbnail img-circle" />
                 </div>
               </div>
               <div class="pm-staff-profile-details text-center">
@@ -295,15 +300,15 @@
           </div>
         </div>
         <div class="social-networks">
-            <a href="https://twitter.com" class="twitter"><img src="../images/twitterIcon.jpg" alt="" class="img-thumbnail img-circle"/></a>
-            <a href="https://facebook.com" class="facebook"><img src="../images/facebookIcon.jpg" alt="" class="img-thumbnail img-circle"/></a>
-            <a href="https://plus.google.com/" class="google"><img src="../images/googlePlusIcon.jpg" alt="" class="img-thumbnail img-circle"/></a>
+            <a href="https://twitter.com" class="twitter"><img src="/images/twitterIcon.jpg" alt="" class="img-thumbnail img-circle"/></a>
+            <a href="https://facebook.com" class="facebook"><img src="/images/facebookIcon.jpg" alt="" class="img-thumbnail img-circle"/></a>
+            <a href="https://plus.google.com/" class="google"><img src="/images/googlePlusIcon.jpg" alt="" class="img-thumbnail img-circle"/></a>
         </div>
         <div class="footer-copyright">
             <p>© 2017 BayaniOne </p>
         </div>
     </footer>
-    <script src="Library/jquery.min.js"></script>
-    <script src="Library/bootstrap.min.js"></script>
+    <script src="../jquery/jquery.min.js"></script>
+    <script src="../jquery/bootstrap.min.js"></script>
 </body>
 </html>
