@@ -1,0 +1,113 @@
+Info Needed!:
+account_type
+  *individual*
+first_name
+last_name
+middle_name
+birthdate
+  *organization*
+org_name
+rep_name
+
+user_photo
+residential_address
+email_address
+username
+password
+
+ALTER TABLE individual_user
+ADD FOREIGN KEY (user_id)
+REFERENCES users (user_id)
+
+ALTER TABLE `users` AUTO_INCREMENT=1
+
+
+
+<div>
+  <form method="post">
+    <?php
+    $connect=mysqli_connect("localhost","root","","bayanione_db");
+    // Check connection
+    if (mysqli_connect_errno())
+    {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+
+    $result = mysqli_query($connect,"SELECT user_id FROM users WHERE username = '".$_SESSION['username']."'");
+    while($row = mysqli_fetch_assoc($result))
+    {
+      echo "<input type=hidden name='user_id' id='user_id' value =" . $row['user_id']. ">";
+    }
+    mysqli_close($connect);
+    ?>
+  <textarea name="post_description" rows="7" cols="64" style="text-align:left;" placeholder=".........Write Someting........" required></textarea>
+  <br>
+  <button name="post">&nbsp;POST</button>
+  <br>
+  <hr>
+  </form>
+  <?php include 'databaseconn.php' ?>
+  <?php
+    if (isset($_POST['post'])){
+    $user_id = $_POST["user_id"];
+    $post_description  = $_POST['post_description'];
+
+    mysqli_query($connect, "INSERT INTO post (post_description,create_date,user_id)
+                VALUES('$post_description','".now()."','$user_id')");
+                if(mysqli_affected_rows($connect) > 0){
+                echo "      ";
+              }else {
+                echo mysqli_error($connect);
+                echo "Not Added!";
+              }
+              //header('location:home.php');
+    }
+  ?>
+
+  <?php
+    /*$connect=mysqli_connect("localhost","root","","bayanione_db");
+    // Check connection
+    if (mysqli_connect_errno())
+    {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    }
+    $result = mysqli_query($connect, "SELECT *,UNIX_TIMESTAMP() - create_date AS TimeSpent from post LEFT JOIN users on users.user_id = post.user_id order by post_id DESC")or die(mysql_error());
+    while($row=mysqli_fetch_array($result)){
+    $post_id = $row['post_id'];
+    $user_id = $row['user_id'];
+    $posted_by = $row['first_name']." ".$row['last_name'];
+  ?>
+<a style="text-decoration:none; float:right;" href="deletepost.php<?php echo '?post_id='.$post_id; ?>"><button><font color="red">x</button></font></a>
+<h3>Posted by: <a href="home.php"> <?php echo $posted_by; ?></a>
+  <?php
+      $days = floor($row['TimeSpent'] / (60 * 60 * 24));
+      $remainder = $row['TimeSpent'] % (60 * 60 * 24);
+      $hours = floor($remainder / (60 * 60));
+      $remainder = $remainder % (60 * 60);
+      $minutes = floor($remainder / 60);
+      $seconds = $remainder % 60;
+      if($days > 0)
+      echo date('F d, Y - H:i:sa', $row['create_date']);
+      elseif($days == 0 && $hours == 0 && $minutes == 0)
+      echo "A few seconds ago";
+      elseif($days == 0 && $hours == 0)
+      echo $minutes.' minutes ago';*/
+  ?>
+</br>
+</br><?php echo $row['post_description']; ?></h3>
+<?php //} ?>
+</div>
+
+
+</br>
+<input type="hidden" id="create_date" name="create_date">
+<script type="text/javascript">
+    n =  new Date();
+    y = n.getFullYear();
+    m = n.getMonth() + 1;
+    d = n.getDate();
+    h = n.getHours();
+    min = n.getMinutes();
+    s = n.getSeconds();
+    document.getElementById("create_date").value = m + "/" + d + "/" + y + "  " + h + ":" + min + ":" + s;
+</script>

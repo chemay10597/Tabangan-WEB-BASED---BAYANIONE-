@@ -1,0 +1,257 @@
+<p><a href="registration.php">Register</a> | <a href="signin.php">Sign In</a></p>
+<form class="modal-content animate" id="UserFormReg" name="UserFormReg" action="registration.php" method="post">
+  <h2>Personal Information:</h2>
+  </br>
+  <fieldset>
+    <?php
+      //code to get user_id
+      $connect=mysqli_connect("localhost","root","","bayanione_db");
+      // Check connection
+      if (mysqli_connect_errno())
+      {
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+      }
+      $result = mysqli_query($connect,"SELECT MAX(user_id) FROM users GROUP BY user_id");
+      if(mysqli_num_rows($result) > 0){
+          while($row = mysqli_fetch_array($result)){
+              $next = $row['MAX(user_id)'] + 1;
+          }
+          echo "<input value='". $next ."' type='hidden' name='user_id' id='user_id'>";
+          echo "</input>";
+      }
+      mysqli_close($connect);
+    ?>
+  <label>Type of account:</label>
+  <select class="input" id="account_type" name="account_type" value="" Height="22px" Width="187px">
+      <option value="">choose type ..</option>
+      <option value="individual">Individual</option>
+      <option value="organization">Organization</option>
+  </select>
+  </br></br>
+  <div id="individual_user" style="display:none;">
+    <fieldset>
+      <table>
+        <tr>
+          <td>
+            <label>First name:</label>
+          </td>
+          <td>
+            <input id="first_name" name="first_name" type="text" placeholder="first name ..."/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Last name:</label>
+          </td>
+          <td>
+            <input id="last_name" name="last_name" type="text"   placeholder="last name ..."/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Middle name:</label>
+          </td>
+          <td>
+            <input id="middle_name" name="middle_name" type="text"   placeholder="middle name ..."/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Birthdate:</label>
+          </td>
+          <td>
+        <input id="birthdate" name="birthdate" type="date"/>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+  </div>
+  <div id="organization_user" style="display:none;">
+    <fieldset>
+      <table>
+        <tr>
+          <td>
+            <label>Organization name:</label>
+          </td>
+          <td>
+            <input id = "org_name" name="org_name" type="text" placeholder="organization name ..."/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label>Representative full name:</label>
+          </td>
+          <td>
+            <input id = "rep_name" name="rep_name" type="text" placeholder="representative full name ..."/>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+  </div>
+    </br></br>
+    <label>User Profile Photo:</label>
+    </br>
+    <img id="user_image" name="user_image" runat="server" height="150" width="150"/>
+    </br>
+    <input type="file" id="user_photo" name="user_photo" accept="image/*" onchange="readURL(this);" required/>
+    <!-- script to display image on select -->
+    <script>
+    //script code to display photo during selection
+      function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#user_image')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(150);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    </br></br>
+    <table>
+      <tr>
+        <td>
+          <label>Residential Address:</label>
+        </td>
+        <td>
+          <input id = "residential_address" name="residential_address" type="text" placeholder="complete address ..." required/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>Email Address:</label>
+        </td>
+        <td>
+          <input id="email_address" name="email_address" type="email" placeholder="user@domain.com" required/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>Username:</label>
+        </td>
+        <td>
+          <input id="username" name="username" type="text" placeholder="username ..." required/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>Password:</label>
+        </td>
+        <td>
+          <input id="password" name="password" type="password" placeholder="password ..." required/>
+        </td>
+      </tr>
+  </table>
+  </fieldset>
+    </br></br>
+  <input type="submit" id="registerUser" name="registerUser" value="Sign Up"/>
+</form>
+
+<?php include 'databaseconn.php' ?>
+<?php
+  //code to insert records in users table, individual_user table, and organization_user table
+  if(isset($_POST['registerUser']))
+  {
+    //variables
+    $user_id = $_POST['user_id'];
+    $account_type = $_POST['account_type'];
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $middle_name = $_POST['middle_name'];
+    $birthdate = $_POST['birthdate'];
+    $org_name = $_POST['org_name'];
+    $rep_name = $_POST['rep_name'];
+    $user_photo = $_POST['user_photo'];
+    $residential_address = $_POST['residential_address'];
+    $email_address = $_POST['email_address'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if(isset($_FILES['user_photo'])) {
+    $user_photo=addslashes(file_get_contents($_FILES['user_photo']['tmp_name'])); //will store the image to fp
+    }
+
+    //query to insert data
+    if($account_type!=''){
+    mysqli_query($connect, "INSERT INTO users (user_id,account_type,user_photo,residential_address,email_address,username,password)
+                VALUES('$user_id','$account_type','$user_photo','$residential_address','$email_address','$username','$password')");
+                if(mysqli_affected_rows($connect) > 0){
+                echo "      ";
+              }else {
+                echo mysqli_error($connect);
+                echo "Not Added!";
+              }
+    }
+    //code to insert records individual_user table
+    if($account_type=='individual'){
+    mysqli_query($connect, "INSERT INTO individual_user (user_id,first_name,last_name,middle_name,birthdate)
+                VALUES('$user_id','$first_name','$last_name','$middle_name','$birthdate')");
+                if(mysqli_affected_rows($connect) > 0){
+                echo "      ";
+              }else {
+                echo mysqli_error($connect);
+                echo "Not Added!";
+              }
+  }
+  //code to insert records organization_user table
+  else if($account_type=='organization'){
+  mysqli_query($connect, "INSERT INTO organization_user (user_id,org_name,rep_name)
+              VALUES('$user_id','$org_name','$rep_name')");
+              if(mysqli_affected_rows($connect) > 0){
+              echo "      ";
+            }else {
+              echo mysqli_error($connect);
+              echo "Not Added!";
+            }
+}
+ echo "<meta http-equiv='refresh' content='0'>";
+}
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form class="modal-content animate" id="UserFormReg" name="UserFormReg" action="registration.php" method="post">
+  <div class="form-group has-feedback">
+    <input class="form-control" placeholder="Password" id="loginpsw" type="password" autocomplete="off" />
+    <span style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginpsw"></span><!---Alredy exists  ! -->
+    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+    <div class="form-group has-feedback"><!----- password -------------->
+        <input class="form-control" placeholder="Password" id="loginpsw" type="password" autocomplete="off" />
+    <span style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginpsw"></span><!---Alredy exists  ! -->
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+    </div>
+    <div class="row">
+    <div class="col-xs-12">
+        <div class="checkbox icheck">
+            <label>
+              <input type="checkbox" id="loginrem" > Remember Me
+            </label>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <button type="button" class="btn btn-green btn-block btn-flat" onclick="userlogin()">Login</button>
+    </div>
+  </div>
+</form>

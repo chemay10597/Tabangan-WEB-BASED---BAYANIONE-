@@ -1,0 +1,13 @@
+﻿.button 
+{
+                position:relative;
+                padding:6px 15px;
+                left:-8px;
+                border:2px solid #207cca;
+                background-color:#207cca;
+                color:#5FCF80;
+}
+.button:hover  {
+                background-color:#5FCF80;
+                color:#207cca;
+}
